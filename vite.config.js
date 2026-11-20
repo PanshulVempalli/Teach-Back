@@ -1,6 +1,14 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { readFileSync } from 'node:fs'
+
+// The landing page's markup is also written into #root at build time, so the built page holds its words for
+// crawlers and for the design checks; React then renders the same markup over it (src/Landing.jsx).
+const landingHtml = () => ({
+  name: 'landing-html',
+  transformIndexHtml: (html) => html.replace('<div id="root"></div>', () => `<div id="root">${readFileSync('src/landing.html', 'utf8')}</div>`),
+})
 
 // Dev-only: serve /api/gemini with the same handler Vercel runs in prod.
 const devApi = (env) => ({
@@ -20,5 +28,7 @@ const devApi = (env) => ({
 })
 
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), tailwindcss(), devApi(loadEnv(mode, process.cwd(), ''))],
+  // The app's bundle goes to /bundle so it can never collide with the design kit's public/assets files.
+  build: { assetsDir: 'bundle' },
+  plugins: [react(), tailwindcss(), landingHtml(), devApi(loadEnv(mode, process.cwd(), ''))],
 }))

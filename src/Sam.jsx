@@ -11,7 +11,7 @@ const MOUTH = {
 const BROW = { confused: [-14, 14], curious: [0, 0], enlightened: [10, -10] }
 const COLOR = { confused: '#d98b6a', curious: '#e3c46b', enlightened: '#8fc08f' }
 
-export default function Sam({ mood = 'curious', size = 120 }) {
+export default function Sam({ mood = 'curious', size = 120, still = false }) {
   const root = useRef()
   useGSAP(() => {
     gsap.to('.mouth', { attr: { d: MOUTH[mood] }, duration: 0.5, ease: 'back.out(2)' })
@@ -21,7 +21,9 @@ export default function Sam({ mood = 'curious', size = 120 }) {
     gsap.fromTo(root.current, { scale: 0.92 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1,0.4)' })
   }, { scope: root, dependencies: [mood] })
 
+  // `still` keeps the mood tweens but drops the endless bob and blink (used where nothing may move on its own).
   useGSAP(() => {
+    if (still) return
     gsap.to('.blob', { y: -4, repeat: -1, yoyo: true, duration: 1.4, ease: 'sine.inOut' })
     gsap.timeline({ repeat: -1, repeatDelay: 3 })
       .to('.eye', { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.08 })
@@ -29,7 +31,7 @@ export default function Sam({ mood = 'curious', size = 120 }) {
   }, { scope: root })
 
   return (
-    <svg ref={root} width={size} height={size} viewBox="0 0 100 100" aria-label={`Sam looks ${mood}`}>
+    <svg ref={root} width={size} height={size} viewBox="0 0 100 100" role="img" aria-label={`Sam looks ${mood}`}>
       <g className="blob">
         <path className="body" fill={COLOR.curious} stroke="#2b2118" strokeWidth="3" d="M50 8C80 8 94 32 92 58 90 84 72 94 50 94 28 94 10 84 8 58 6 32 20 8 50 8Z" />
         {[36, 64].map((cx) => (

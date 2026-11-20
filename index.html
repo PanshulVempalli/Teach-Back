@@ -1,11 +1,60 @@
 <!doctype html>
-<html lang="en">
+<!-- The landing page is the design kit's page (public/assets, public/landing.css, src/landing.html). Every tag
+     marked data-landing is removed by Landing.jsx when the app screens take over, so the app keeps its own look.
+     data-type, data-radius, data-ground, data-buttons and data-motion only act while that kit CSS is loaded. -->
+<html lang="en" data-type="software" data-radius="soft" data-ground="sky" data-buttons="solid" data-motion>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Professor Reverse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Professor Reverse: study app where you teach an AI student</title>
+    <meta name="description" content="Paste notes or drop a PDF, explain each idea to Sam, and get a gap report and a quiz built from your own mistakes." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Professor Reverse: study app where you teach an AI student" />
+    <meta property="og:description" content="Sam is an AI student who gets confused where you are vague. Afterwards you get a gap report and a quiz." />
+    <meta property="og:image" content="/share.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#f6efe0" />
+    <!-- <link rel="canonical" href="https://[the client's domain]/"> -->
+    <meta name="site-kind" content="software" />
+    <meta name="page-type" content="software" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <link data-landing href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wdth,wght@85..100,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link data-landing rel="stylesheet" href="/assets/system.css" />
+    <link data-landing rel="stylesheet" href="/assets/ui/cards.css" />
+    <link data-landing rel="stylesheet" href="/assets/motion/motion.css" />
+    <link data-landing rel="stylesheet" href="/assets/backgrounds/backgrounds.css" />
+    <link data-landing rel="stylesheet" href="/assets/layout/layout.css" />
+    <link data-landing rel="stylesheet" href="/assets/icons/icon.css" />
+    <style data-landing>
+:root {
+  --p-bg: #f6efe0; --p-surface: #ebe3d5; --p-ink: #2b2118; --p-muted: #6b6256;
+  --p-accent: #bb4e28; --p-accent-ink: #ffffff; --p-action: #bb4e28; --p-action-ink: #ffffff;
+  --p-inv-bg: #2b2118; --p-inv-surface: #372d24; --p-inv-ink: #f6efe0; --p-inv-muted: #a29a8d;
+  --p-inv-accent: #bb4e28; --p-inv-accent-ink: #ffffff; --p-inv-action: #bb4e28; --p-inv-action-ink: #ffffff;
+  --font-display: "IBM Plex Sans", system-ui, sans-serif;
+  --font-text: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.025em;
+  --display-tracking-xl: -0.035em;
+  --ly-scale: 0.98;
+}
+    </style>
+    <link data-landing rel="stylesheet" href="/assets/ui/base.css" />
+    <link data-landing rel="stylesheet" href="/assets/ui/chat/fragment.css" />
+    <link data-landing rel="stylesheet" href="/assets/ui/doc/fragment.css" />
+    <link data-landing rel="stylesheet" href="/assets/ui/checklist/fragment.css" />
+    <link data-landing rel="stylesheet" href="/assets/ui/files/fragment.css" />
+    <link data-landing rel="stylesheet" href="/landing.css" />
+    <script data-landing>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+    <script data-landing>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+    <link data-landing rel="modulepreload" href="/assets/moments/moments.js" />
+    <link data-landing rel="modulepreload" href="/assets/moments/lib.js" />
+    <link data-landing rel="modulepreload" href="/assets/moments/letters-assemble/moment.js" />
+    <link data-landing rel="modulepreload" href="/assets/moments/line-carries-colour/moment.js" />
   </head>
-  <body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body>
+  <body class="is-landing"><div id="root"></div><script type="module" src="/src/main.jsx"></script></body>
 </html>
