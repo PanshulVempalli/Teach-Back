@@ -11,7 +11,12 @@
 }
 body {
   background-color: var(--color-paper);
-  background-image: repeating-linear-gradient(transparent 0 31px, #cdbf9f55 31px 32px);
+  background-attachment: fixed;
+  /* ruled lines + warm light from the top + a darker, aged edge at the bottom */
+  background-image:
+    repeating-linear-gradient(transparent 0 31px, #cdbf9f66 31px 32px),
+    radial-gradient(ellipse 90% 60% at 50% 0%, #fffaf0 0%, transparent 70%),
+    radial-gradient(ellipse 120% 50% at 50% 115%, #dccfae 0%, transparent 70%);
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
@@ -30,3 +35,13 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-i
 :focus-visible { outline: 3px solid var(--color-gold); outline-offset: 2px; }
 .strike, .new, .sam-big { will-change: transform, opacity; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* Notebook margin line and punch holes, wide screens only so they never cross content */
+@media (min-width: 1100px) {
+  body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      linear-gradient(90deg, transparent 71px, rgba(196,85,45,.35) 71px 73px, transparent 73px),
+      radial-gradient(circle at 32px 18vh, #cfc2a2 0 9px, rgba(43,33,24,.3) 9px 11px, transparent 11px),
+      radial-gradient(circle at 32px 50vh, #cfc2a2 0 9px, rgba(43,33,24,.3) 9px 11px, transparent 11px),
+      radial-gradient(circle at 32px 82vh, #cfc2a2 0 9px, rgba(43,33,24,.3) 9px 11px, transparent 11px); }
+}
