@@ -13,6 +13,7 @@ export default function App() {
   const [ctx, setCtx] = useState(null) // {notes, concepts}
   const [status, setStatus] = useState({})
   const [rows, setRows] = useState([])
+  const [traps, setTraps] = useState({ caught: 0, missed: 0 })
   const [muted, setM] = useState(sound.muted)
   const stage = useRef()
 
@@ -22,8 +23,8 @@ export default function App() {
   let page
   if (view === 'landing') page = <Landing onStart={() => setView('setup')} />
   else if (view === 'setup') page = <Setup onReady={(c) => { setCtx(c); setView('teach') }} />
-  else if (view === 'teach') page = <Teach {...ctx} onDone={(s) => { setStatus(s); setView('report') }} />
-  else if (view === 'report') page = <Report concepts={ctx.concepts} status={status} onQuiz={(r) => { setRows(r); setView('quiz') }} onRestart={() => setView('setup')} />
+  else if (view === 'teach') page = <Teach {...ctx} onDone={(s, t) => { setStatus(s); setTraps({ ...t }); setView('report') }} />
+  else if (view === 'report') page = <Report concepts={ctx.concepts} status={status} traps={traps} onQuiz={(r) => { setRows(r); setView('quiz') }} onRestart={() => setView('setup')} />
   else page = <Quiz rows={rows} onBack={() => setView('report')} />
 
   return (

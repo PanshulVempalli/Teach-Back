@@ -8,7 +8,7 @@ const META = {
   skipped: { label: 'Skipped', color: 'bg-rust', w: 15 },
 }
 
-export default function Report({ concepts, status, onQuiz, onRestart }) {
+export default function Report({ concepts, status, traps, onQuiz, onRestart }) {
   const root = useRef()
   const rows = concepts.map((c) => ({ ...c, ...(status[c.id] || { status: 'skipped' }) }))
   const count = (s) => rows.filter((r) => r.status === s).length
@@ -29,6 +29,9 @@ export default function Report({ concepts, status, onQuiz, onRestart }) {
           </div>
         ))}
       </div>
+      {traps.caught + traps.missed > 0 && (
+        <p className="font-hand text-2xl">You caught {traps.caught} of {traps.caught + traps.missed} of Sam's deliberate mistakes.</p>
+      )}
       {rows.map((r) => (
         <div key={r.id} className="row card p-4">
           <div className="flex justify-between font-display text-xl"><span>{r.name}</span><span className="font-hand text-2xl">{META[r.status].label}</span></div>
