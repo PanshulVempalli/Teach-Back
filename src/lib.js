@@ -14,14 +14,18 @@ export async function pdfToText(file) {
 
 // Ask Gemini via the server proxy; json=true parses the reply.
 export async function ai(prompt, json = true) {
-  const r = await fetch('/api/gemini', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt, json }),
-  })
-  const d = await r.json()
-  if (!r.ok) throw new Error(d.error || 'AI request failed')
-  return json ? JSON.parse(d.text) : d.text
+  // Free tier gets "high demand" spikes: retry twice with backoff before surfacing the error.
+  for (let attempt = 0; ; attempt++) {
+    const r = await fetch('/api/gemini', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, json }),
+    })
+    const d = await r.json()
+    if (r.ok) return json ? JSON.parse(d.text) : d.text
+    if (attempt >= 2 || ![429, 500, 503].includes(r.status)) throw new Error(d.error || 'AI request failed')
+    await new Promise((res) => setTimeout(res, 1500 * (attempt + 1)))
+  }
 }
 
 // shortcut: the notes are truncated to ~24k chars (no real chunking), upgrade to retrieval for long PDFs.

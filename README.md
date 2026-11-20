@@ -14,7 +14,7 @@ Teaching exposes gaps that rereading hides. This is the Feynman technique with a
 
 ## How the AI is used
 
-Google Gemini (`gemini-2.5-flash`, free tier) does four jobs:
+Google Gemini (`gemini-3.1-flash-lite`, falling back to `gemini-3.8-flash` then `gemini-3.5-flash` when one is busy; free tier) does four jobs:
 
 1. Extracts 5 to 8 key concepts from your notes. These are the answer key.
 2. **Grades** each of your messages against the concepts (JSON: solid or shaky, what was wrong, the misconception implied).
