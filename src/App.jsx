@@ -29,8 +29,8 @@ export default function App() {
 
   return (
     <>
-      <button className="fixed top-3 right-3 z-50 card px-3 py-1 text-sm cursor-pointer" aria-pressed={muted}
-        onClick={() => { setMuted(!muted); setM(!muted) }}>{muted ? '🔇 Sound off' : '🔊 Sound on'}</button>
+      <button className="fixed top-3 right-3 z-50 card px-3 min-h-11 text-sm cursor-pointer" aria-pressed={muted}
+        onClick={() => { setMuted(!muted); setM(!muted) }}>{muted ? 'Sound off' : 'Sound on'}</button>
       <div ref={stage}>{page}</div>
     </>
   )

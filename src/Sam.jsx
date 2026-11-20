@@ -23,17 +23,23 @@ export default function Sam({ mood = 'curious', size = 120 }) {
 
   useGSAP(() => {
     gsap.to('.blob', { y: -4, repeat: -1, yoyo: true, duration: 1.4, ease: 'sine.inOut' })
-    gsap.to('.eye', { scaleY: 0.1, transformOrigin: '50% 50%', repeat: -1, repeatDelay: 3, yoyo: true, duration: 0.08 })
+    gsap.timeline({ repeat: -1, repeatDelay: 3 })
+      .to('.eye', { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.08 })
+      .to('.eye', { scaleY: 1, duration: 0.08 })
   }, { scope: root })
 
   return (
     <svg ref={root} width={size} height={size} viewBox="0 0 100 100" aria-label={`Sam looks ${mood}`}>
       <g className="blob">
         <path className="body" fill={COLOR.curious} stroke="#2b2118" strokeWidth="3" d="M50 8C80 8 94 32 92 58 90 84 72 94 50 94 28 94 10 84 8 58 6 32 20 8 50 8Z" />
-        <circle className="eye" cx="36" cy="50" r="5" fill="#2b2118" />
-        <circle className="eye" cx="64" cy="50" r="5" fill="#2b2118" />
-        <line className="brow-l" x1="28" y1="38" x2="44" y2="38" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
-        <line className="brow-r" x1="56" y1="38" x2="72" y2="38" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
+        {[36, 64].map((cx) => (
+          <g className="eye" key={cx}>
+            <circle cx={cx} cy="50" r="9" fill="#fff" stroke="#2b2118" strokeWidth="2.5" />
+            <circle cx={cx + 1.5} cy="51" r="4" fill="#2b2118" />
+          </g>
+        ))}
+        <line className="brow-l" x1="26" y1="32" x2="44" y2="32" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
+        <line className="brow-r" x1="56" y1="32" x2="74" y2="32" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
         <path className="mouth" d={MOUTH.curious} fill="none" stroke="#2b2118" strokeWidth="3" strokeLinecap="round" />
       </g>
     </svg>
