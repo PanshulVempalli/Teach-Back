@@ -8,15 +8,16 @@ const MOUTH = {
   curious: 'M40 76 Q50 78 60 76',
   enlightened: 'M34 70 Q50 92 66 70',
 }
-const BROW = { confused: [-14, 14], curious: [0, 0], enlightened: [10, -10] }
+const BROW = { confused: [-14, 14], curious: [0, 0], enlightened: [0, 0] }
+const LIFT = { confused: 0, curious: 0, enlightened: -6 }
 const COLOR = { confused: '#d98b6a', curious: '#e3c46b', enlightened: '#8fc08f' }
 
 export default function Sam({ mood = 'curious', size = 120, still = false }) {
   const root = useRef()
   useGSAP(() => {
     gsap.to('.mouth', { attr: { d: MOUTH[mood] }, duration: 0.5, ease: 'back.out(2)' })
-    gsap.to('.brow-l', { rotation: BROW[mood][0], transformOrigin: '50% 50%', duration: 0.4 })
-    gsap.to('.brow-r', { rotation: BROW[mood][1], transformOrigin: '50% 50%', duration: 0.4 })
+    gsap.to('.brow-l', { rotation: BROW[mood][0], y: LIFT[mood], transformOrigin: '50% 50%', duration: 0.4 })
+    gsap.to('.brow-r', { rotation: BROW[mood][1], y: LIFT[mood], transformOrigin: '50% 50%', duration: 0.4 })
     gsap.to('.body', { fill: COLOR[mood], duration: 0.6 })
     gsap.fromTo(root.current, { scale: 0.92 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1,0.4)' })
   }, { scope: root, dependencies: [mood] })

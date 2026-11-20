@@ -1,8 +1,7 @@
-import * as pdfjs from 'pdfjs-dist'
-import worker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
-pdfjs.GlobalWorkerOptions.workerSrc = worker
-
+// pdf.js is large, so it only loads when someone actually drops a PDF.
 export async function pdfToText(file) {
+  const [pdfjs, { default: worker }] = await Promise.all([import('pdfjs-dist'), import('pdfjs-dist/build/pdf.worker.min.mjs?url')])
+  pdfjs.GlobalWorkerOptions.workerSrc = worker
   const pdf = await pdfjs.getDocument({ data: await file.arrayBuffer() }).promise
   let out = ''
   for (let i = 1; i <= pdf.numPages; i++) {
