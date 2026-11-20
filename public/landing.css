@@ -3,7 +3,9 @@
 
 /* the hero's picture: the lit ground behind the notes, Sam on it */
 .hero__media--lit { background: var(--ground-bg); border: 0; }
-.hero__media--lit .ui-doc { width: 560px; padding-right: 200px; }
+.hero__media--lit .ui-doc { width: min(560px, 100%); max-width: 100%; padding-right: 200px; }
+@media (max-width: 639px) { .hero__media--lit .ui-doc { padding-right: 96px; } }
+.landing { overflow-x: clip; }
 .hero-sam { position: absolute; right: 28px; bottom: 28px; z-index: 3; display: block; width: 132px; height: 132px; }
 @media (max-width: 1023px) { .hero-sam { width: 96px; height: 96px; right: 20px; bottom: 20px; } }
 
@@ -67,12 +69,13 @@
 
 /* the statement moment: its line under the words is body text, in the ink */
 .mo-la__type { font-size: clamp(56px, 14vw, 240px); }
-.mo-la__sub { color: var(--ink); }
+.mo-la__sub { color: var(--ink) !important; opacity: 1 !important; }
 @media (max-width: 639px) { .mo-la__type { font-size: clamp(48px, 16vw, 96px); } }
 .ui-chat__ph { color: var(--u-text-2); }
 
 /* the closing name, set across the wrap (hand-set size: 17 letters in 1280px) */
-.close__word { font-size: clamp(40px, 10.2vw, 146px); white-space: nowrap; }
+.close__word { font-size: clamp(40px, 10.2vw, 146px); white-space: nowrap; line-height: 1.2; padding-top: .12em; overflow: visible; }
+@media (max-width: 639px) { .nav__actions { display: none; } }
 @media (max-width: 639px) { .close__word { font-size: clamp(32px, 9.4vw, 56px); } }
 
 /* Sam asking the first question of a session, in the FAQ's left column */
