@@ -1,0 +1,23 @@
+Most study apps are built around consuming information. Flashcards. Summaries. Re-reading the same notes over and over. But there's a problem with that. Passive review doesn't stick.
+
+Cognitive science has known for decades that the best way to learn something is to teach it. When you have to explain a concept to someone else, you discover the gaps you didn't know you had. It's called the protégé effect.
+
+The only problem? You can't always find a willing student.
+
+So we built one.
+
+This is StudyLens. You upload your notes — a PDF, a text file, anything — and you're dropped into a live conversation with Sam. Sam is an AI student who has never seen your topic before. He genuinely doesn't know. And it's your job to teach him.
+
+Sam asks follow-up questions when your explanation is vague. He pushes back when something doesn't make sense. And every few turns, he repeats something back to you — slightly wrong — on purpose. If you catch the mistake, you get credit. If you miss it, it shows up later in your report.
+
+The whole time, Sam is quietly tracking which concepts you explained confidently and which ones were shaky.
+
+When you're done teaching, you get a personalised report. A grade. A breakdown of every concept, ranked weakest first. And Sam's own notes on exactly where your understanding started to slip.
+
+Then comes the quiz. But this isn't a generic quiz. The wrong answers are built from your own misconceptions — the things you actually said during the session. You can't guess your way through it.
+
+The whole app runs in a browser. No account needed. Just your notes, and Sam waiting to learn.
+
+We built this because re-reading doesn't work. Teaching does. And now you have someone to teach.
+
+StudyLens. Upload your notes. Teach Sam. Find out what you actually know.
